@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Database</title>
+</head>
+
+<body>
+    <h1>Student Database</h1>
+    <ol id="student-list"></ol>
+
+    <script>
+        // Fetch students from the REST API
+        fetch('http://localhost:3000/students')
+            .then(response => response.json())
+            .then(students => {
+                const studentList = document.getElementById('student-list');
+                students.forEach(student => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${student.studentname} -- ${student.usn}`;
+                    studentList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching students:', error));
+    </script>
+</body>
+
+</html>
